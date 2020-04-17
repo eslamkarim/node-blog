@@ -13,11 +13,7 @@ router.get('/', function(req, resp) {
     });
     });
 router.post('/',function(req, resp) {
-   var {firstName,lastName,email,password,gender} = req.body
-   console.log(req.body);
-   console.log(firstName);
-   
-   
+   var {firstName,lastName,email,password,gender} = req.body   
    userModel.create([{firstName: firstName}, {lastName: lastName}, {email: email}, {password: password}, {gender: gender}], (err,user) =>{
       if(!err) return resp.json(user)
       return resp.send(err)
