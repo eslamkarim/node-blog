@@ -8,8 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "node-blog"
+    "url": "https://github.com/eslamkarim/node-blog.git"
   },
   "author": "esla karim",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.9"
+  }
 }
