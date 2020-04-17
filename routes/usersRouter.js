@@ -7,6 +7,11 @@ router.get('/', function(req, resp) {
     if(!err) return resp.json(res)
   });
   });
+  router.get('/:id', function(req, resp) {
+    userModel.find({_id: req.params.id},(err, res) =>{
+      if(!err) return resp.json(res)
+    });
+    });
 router.post('/',function(req, resp) {
    var {firstName,lastName,email,password,gender} = req.body
    userModel.create([{firstName: firstName}, {lastName: lastName}, {email: email}, {password: password}, {gender: gender}], (err,user) =>{
