@@ -14,10 +14,29 @@ router.get('/', function(req, resp) {
     });
 router.post('/',function(req, resp) {
    var {firstName,lastName,email,password,gender} = req.body
+   console.log(req.body);
+   console.log(firstName);
+   
+   
    userModel.create([{firstName: firstName}, {lastName: lastName}, {email: email}, {password: password}, {gender: gender}], (err,user) =>{
       if(!err) return resp.json(user)
-      return resp.send("error can't save user")
+      return resp.send(err)
    })
   });
+
+router.put('/:id',function(req, resp) {
+  userModel.updateOne({_id: req.params.id} ,{ $set: req.body },
+  (err, user)=>{  
+    if(!err) return resp.json(user)
+     return resp.send("can't update user")
+  });
+});
+
+router.delete('/:id',function(req, resp) {
+  userModel.deleteOne({_id: req.params.id} ,(err, user)=>{  
+    if(!err) return resp.json(user)
+     return resp.send("can't delete user")
+  });
+});
 
 module.exports = router
