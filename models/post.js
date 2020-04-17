@@ -4,6 +4,6 @@ const postSchema = new mongoose.Schema({
     author: {type: String, required: true}
 })
 
-const postModel = mongoose.model('User', postSchema);
+const postModel = mongoose.model('Post', postSchema);
 
 module.exports = postModel
