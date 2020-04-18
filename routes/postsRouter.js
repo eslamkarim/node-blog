@@ -2,19 +2,18 @@ const express = require('express')
 const router = express.Router()
 const postModel = require('../models/post.js')
 
-router.get('/', function(req, resp) {
+router.get('/', async function(req, resp) {
   postModel.find({},(err, res) =>{
     if(!err) return resp.json(res)
-  });
+  }).populate('author');
   });
   router.get('/:id', function(req, resp) {
     postModel.find({_id: req.params.id},(err, res) =>{
       if(!err) return resp.json(res)
-    });
+    }).populate('author');
     });
 router.post('/',function(req, resp) {
-   var {post_text,author} = req.body   
-   postModel.create([{post_text: post_text}, {author: author}], (err,post) =>{
+   postModel.create(req.body, (err,post) =>{
       if(!err) return resp.json(post)
       return resp.send(err)
    })
