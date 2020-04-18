@@ -6,23 +6,23 @@ const jwt = require('jsonwebtoken')
 const jwtKey = 'my_secret_key'
 const jwtExpirySeconds = 300
 
-router.get('/welcome', (req, res) => {
-  const token = req.cookies.token
-  if (!token) {
-    return res.status(401).end()
-  }
-  try {
-    payload = jwt.verify(token, jwtKey)
-  } catch (e) {
-    if (e instanceof jwt.JsonWebTokenError) {
-      // if the error thrown is because the JWT is unauthorized, return a 401 error
-      return res.status(401).end()
-    }
-    // otherwise, return a bad request error
-    return res.status(400).end()
-  }
+// router.get('/welcome', (req, res) => {
+//   const token = req.cookies.token
+//   if (!token) {
+//     return res.status(401).end()
+//   }
+//   try {
+//     payload = jwt.verify(token, jwtKey)
+//   } catch (e) {
+//     if (e instanceof jwt.JsonWebTokenError) {
+//       // if the error thrown is because the JWT is unauthorized, return a 401 error
+//       return res.status(401).end()
+//     }
+//     // otherwise, return a bad request error
+//     return res.status(400).end()
+//   }
 
-})
+// })
 
 router.post('/refresh', (req, res) => {
   // (BEGIN) The code uptil this point is the same as the first part of the `welcome` route
@@ -41,10 +41,6 @@ router.post('/refresh', (req, res) => {
     }
     return res.status(400).end()
   }
-  // (END) The code uptil this point is the same as the first part of the `welcome` route
-
-  // We ensure that a new token is not issued until enough time has elapsed
-  // In this case, a new token will only be issued if the old token is within
   // 30 seconds of expiry. Otherwise, return a bad request status
   const nowUnixSeconds = Math.round(Number(new Date()) / 1000)
   if (payload.exp - nowUnixSeconds > 30) {
